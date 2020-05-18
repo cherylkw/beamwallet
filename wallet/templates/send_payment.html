@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-6 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                <form class="form-horizontal form-material" action="{% url 'send_payment' contact.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h5 class="card-title m-b-0">Send Payment to {{contact.username}}</h5>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Amount $</label>
+                        <div class="col-md-12">
+                            <input type="number" name="send_amount" id="id_send_amount" placeholder="0.00" step="0.1" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Reference</label>
+                        <div class="col-md-12">
+                            <input type="text" name="description" id="id_description" placeholder="reference" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="error-msg-red">
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

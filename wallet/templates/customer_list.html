@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6 no no-wrap">
+                            <h5 class="card-title m-b-0 align-self-center">Customer List</h5>
+                        </div>
+                        <div class="col-sm-6 no-wrap" align="right">
+                            <h5 class="card-title">Total Customers : <span class="text-info">{{ customer_list.count }}</span></h5>
+                        </div>
+                    </div>                   
+                </div>
+                <hr><br>
+                <div class="row">
+                    {% if customer_list.count > 0 %}
+                    {% for customer in customer_list %}
+                    <div class="col-sm-3 no no-wrap">
+                        <h4 class="card-title"><a href="{% url 'customer_payrec' customer.user.id %}">{{customer.user.username}}</a></h4>
+                    </div>
+                    <div class="col-sm-5 no-wrap">
+                        <h6>{{ customer.user.email }}</h6>
+                    </div>
+                    <div class="col-sm-4 no-wrap">
+                        <h6>Join : {{ customer.sign_date | date:"M d, Y" }}</h6>
+                    </div>
+                    {% endfor%}
+                    {% endif%}
+                </div>
+                <br><br><br>
+                <div>
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="{{ message.tags }}"><h5 class="text-success" align="center"><b>{{ message }}</b></h5></div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

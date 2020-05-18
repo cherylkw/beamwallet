@@ -1,0 +1,390 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+    font-family: "Montserrat", sans-serif;
+    color: #ffffff;
+    background: #5e35b1;
+  }
+  
+  a {
+    color: #fdc134;
+  }
+  
+  a:hover {
+    color: #fdd067;
+    text-decoration: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  #small-link {
+    font-size: 14px;
+  }
+  
+  #error-msg-red {
+    font-size: 12px;
+    text-align: left;
+    color: red;
+  }
+  
+  #error-msg-yellow {
+    font-size: 13px;
+    text-align: left;
+    color: #fdc134;
+  }
+  
+  /*--------------------------------------------------------------
+  # Header
+  --------------------------------------------------------------*/
+  #header {
+    height: 80px;
+    transition: all 0.5s;
+    z-index: 997;
+    transition: all 0.5s;
+    padding: 16px 0;
+    background: #5e35b1;
+  }
+  
+  #header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #header .logo h1 a, #header .logo h1 a:hover {
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  
+  #header .logo h1 a span, #header .logo h1 a:hover span {
+    color: #fdc134;
+  }
+  
+  #header .logo img {
+    padding: 0;
+    margin: 0;
+    max-height: 40px;
+  }
+  
+  /*--------------------------------------------------------------
+  # Navigation Menu
+  --------------------------------------------------------------*/
+  /* Desktop Navigation */
+  .nav-menu, .nav-menu * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .nav-menu > ul > li {
+    position: relative;
+    white-space: nowrap;
+    float: left;
+  }
+  
+  .nav-menu ul {
+    border-radius: 6px;
+  }
+  
+  .nav-menu a {
+    display: block;
+    position: relative;
+    color: #adc7de;
+    padding: 10px 15px;
+    transition: 0.3s;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+  }
+  
+  .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .nav-menu .get-started a {
+    background: #213b52;
+    color: #fff;
+    border-radius: 50px;
+    margin: 2px 0 0 15px;
+    padding: 4px 25px 6px 25px;
+    border: 2px solid #fdc134;
+  }
+  
+  .nav-menu .get-started a:hover {
+    background: #fdc134;
+    color: #213b52;
+  }
+  
+
+  
+  /* Mobile Navigation */
+  .mobile-nav-toggle {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    z-index: 9998;
+    border: 0;
+    background: none;
+    font-size: 24px;
+    transition: all 0.4s;
+    outline: none !important;
+    line-height: 1;
+    cursor: pointer;
+    text-align: right;
+  }
+  
+  .mobile-nav-toggle i {
+    color: #fdc134;
+  }
+  
+  .mobile-nav {
+    position: fixed;
+    top: 55px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    z-index: 9999;
+    overflow-y: auto;
+    background: #fff;
+    transition: ease-in-out 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 10px;
+    padding: 10px 0;
+  }
+  
+  .mobile-nav * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .mobile-nav a {
+    display: block;
+    position: relative;
+    color: #213b52;
+    padding: 10px 20px;
+    font-weight: 500;
+    outline: none;
+    transition: 0.3s;
+  }
+  
+  .mobile-nav a:hover, .mobile-nav .active > a, .mobile-nav li:hover > a {
+    color: #fdc134;
+    text-decoration: none;
+  }
+  
+  .mobile-nav .get-started a {
+    background: #213b52;
+    color: #fff;
+    border-radius: 50px;
+    margin: 15px;
+    padding: 8px 25px 10px 25px;
+    text-align: center;
+  }
+  
+  .mobile-nav .get-started a:hover {
+    background: #fdc134;
+    color: #213b52;
+  }
+  
+  .mobile-nav-overly {
+    width: 100%;
+    height: 100%;
+    z-index: 9997;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: rgba(18, 33, 46, 0.6);
+    overflow: hidden;
+    display: none;
+    transition: ease-in-out 0.2s;
+  }
+  
+  .mobile-nav-active {
+    overflow: hidden;
+  }
+  
+  .mobile-nav-active .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .mobile-nav-active .mobile-nav-toggle i {
+    color: #fff;
+  }
+  
+  /*--------------------------------------------------------------
+  # Hero Section
+  --------------------------------------------------------------*/
+  #hero {
+    width: 100%;
+    padding: 0 0 0 0;
+    background: #5e35b1;
+  }
+  
+  #hero h1 {
+    margin: 0 0 15px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #d2e0ed;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #hero h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+  
+  #hero h4 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  
+  #hero h5 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  
+  #hero .btn-get-started {
+    color: #213b52;
+    border-radius: 50px;
+    padding: 8px 35px 10px 35px;
+    border: 2px solid #fdc134;
+    transition: all ease-in-out 0.3s;
+    display: inline-block;
+    background: #fdc134;
+  }
+  
+  #hero .btn-get-started:hover {
+    background: transparent;
+    color: #fff;
+  }
+  
+  @media (max-width: 991px) {
+    #hero .hero-img {
+      text-align: center;
+    }
+    #hero .hero-img img {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    #hero {
+      -moz-text-align-last: center;
+      text-align-last: center;
+    }
+    #hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+    #hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
+  
+    #hero h4 {
+      margin-bottom: 30px;
+      line-height: 20px;
+      font-size: 14px;
+    }
+    #hero h5 {
+      margin-bottom: 30px;
+      line-height: 20px;
+      font-size: 12px;
+    }
+    #hero .hero-img img {
+      width: 70%;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    #hero .hero-img img {
+      width: 80%;
+    }
+  }
+  
+  
+  /*--------------------------------------------------------------
+  #  sms verfication and register page
+  --------------------------------------------------------------*/
+  #wrapper {
+      font-size: 1.5rem;
+      text-align: center;
+      box-sizing: border-box;
+      color: #5e35b1;
+      background: #5e35b1;
+    }
+    #wrapper #dialog {
+      border: solid 1px #ccc;
+      margin: 10px auto;
+      padding: 20px 30px;
+      display: inline-block;
+      background-color: rgb(255, 255, 255);
+      overflow: hidden;
+      position: relative;
+      max-width: 550px;
+    }
+    #wrapper #dialog h5 {
+      margin: 0 0 10px;
+      padding: 0;
+      line-height: 1.25;
+    }
+    #wrapper #dialog span {
+      font-size: 90%;
+    }
+    #wrapper #dialog #form {
+      max-width: 540px;
+      margin: 15px auto 0;
+    }
+    #wrapper #dialog #form input {
+      margin: 0 5px;
+      text-align: center;
+      line-height: 45px;
+      font-size: 25px;
+      border: solid 1px #ccc;
+      outline: none;
+      width: 40px;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      border-radius: 3px;
+    }
+    #wrapper #dialog #form input:focus {
+      border-color: rgb(37, 155, 223);
+    }
+    #wrapper #dialog #form input::-moz-selection {
+      background: transparent;
+    }
+    #wrapper #dialog #form input::selection {
+      background: transparent;
+    }
+    #wrapper #dialog #form button {
+      margin: 30px 0 50px;
+      width: 50%;
+      padding: 6px;
+      background-color: rgb(37, 155, 223);
+      border: none;
+      text-transform: uppercase;
+    }
+  
+    #wrapper #dialog div {
+      position: relative;
+      z-index: 1;
+    }
+  
+  

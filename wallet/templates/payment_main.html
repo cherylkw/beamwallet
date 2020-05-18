@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-6 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h5 class="card-title m-b-0">Send Payment</h5>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12"><h5>Choose contact from your contact list:</h5></label>
+                        <div class="col-sm-12">
+                            {% if contactlist.count == 0 %}
+                            <h5>No contact in your list. Add one now.</h5>
+                        {% else %}
+                        {%  for contact in contactlist%}
+                        <div>
+                            <h5 class="card-title"><a href="{% url 'send_payment' contact.person.id %}">
+                                {{contact.person.username}}
+                            </a></h5>
+                        </div>
+                        {%  endfor %}
+                        {% endif %}    
+                        </div>
+                    </div>
+                    <div id="error-msg-red">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

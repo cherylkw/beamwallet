@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                 <div>
+                    <div class="row">
+                        <div class="col-sm-6 no no-wrap">
+                            <h5 class="card-title">Paid Record For <span class="text-info">{{customer_name}}</span></h5>
+                        </div>
+                        <div class="col-sm-6 no-wrap" align="right">
+                            <h5 class="card-title">Total Paid : <span class="text-info">${{ total }}</span></h5>
+                        </div>
+                    </div>                   
+                </div>
+                <div class="table-responsive m-t-20 no-wrap">
+                    <table class="table vm no-th-brd pro-of-month">
+                        <thead>
+                            <tr>
+                                <th>Transcation ID</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if record.count > 0 %}
+                            {%  for rec in record %}
+                            <tr>
+                                <td>
+                                    <h6>{{rec.trx_id}}</h6><small class="text-muted">{{rec.description}}</small></td>
+                                <td>${{rec.amount}}</td>
+                                <td>{{rec.trx_date | date:"M d, Y"}}</td>
+                            </tr>
+                            {%  endfor %}
+                            {% else %}
+                                <tr><td><h5 class="text-info">No payment yet</h5></td><td></td><td></td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <form class="form-horizontal form-material" action="{% url 'pay_merchant_qrcode'%}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="customer_option" value="{{ customer_id }}"
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success">Scan Pay</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

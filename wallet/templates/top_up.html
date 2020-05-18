@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-4 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                <form class="form-horizontal form-material" action="{% url 'top_up'%}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h5 class="card-title m-b-0">Top Up</h5>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Select Options</label>
+                        <div class="col-sm-12">
+                            <select name="bank_option" class="form-control form-control-line">
+                                {%  for bank in banklist %}
+                                <option value={{bank.bank.id}}>{{bank.bank.name}}</option>
+                                {%  endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Amount $</label>
+                        <div class="col-md-12">
+                            <input type="number" name="amount" id="id_amount" placeholder="0.00" step="0.1" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Top Up</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="error-msg-red">
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

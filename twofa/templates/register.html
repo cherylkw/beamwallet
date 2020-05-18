@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="container">
+        <div id="wrapper">
+            <div id="dialog" data-aos="fade-center">
+            <h5>Sign Up</h5>
+            <form action="{% url 'register' %}" method="POST" role="form">
+                
+                {% csrf_token %}
+                <div id="error-msg-red">
+                {{ form.non_field_errors }}
+                {{ form.username.errors }}
+                {{ form.email.errors }}
+                {{ form.country_code.errors }}
+                {{ form.phone_number.errors }}
+                {{ form.password.errors }}
+                </div>
+                <div class="row">
+                {{ form.username }}
+                </div>
+                <div class="row">
+                {{ form.email }}
+                </div>
+                <div class="row">
+                {{ form.country_code }} {{ form.phone_number }}
+                </div>
+                <div class="row">
+                {{ form.password }} {{ form.confirm_password }}
+                </div>
+
+                <input type="submit" value="Sign Up" class="btn btn-info btn-block">
+                <small style="float: right;"><a href="/login">Login</a></small>
+            </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

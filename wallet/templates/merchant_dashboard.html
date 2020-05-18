@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+{% block container %}
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">{{request.user.username}} Dashboard</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Show Balance block and Balance Chart -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div>
+                                        <h5 class="card-title m-b-0">Total Balance</h5>
+                                    </div>
+                                </div><br>
+                                <div align="center">
+                                    <h2 class="display-6 m-t-30 font-medium">${{totalbalance}}</h2>
+                                </div>
+                                <br><hr><br>
+                                <div class="p-t-40">
+                                    <div class="row text-center">
+                                        <div class="col-sm-4"><a href="{% url 'pay_merchant_main' %}">
+                                            <h5 class="card-title"><span class="round round-danger"><i class="fa fa-money"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Scan Pay</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'customer_list' %}">
+                                            <h5 class="card-title"><span class="round round-info"><i class="fa fa-user-circle-o"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Customer List</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'logout' %}">
+                                            <h5 class="card-title"><span class="round round-success"><i class="fa fa-power-off"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Logout</h6></a>
+                                        </div>
+                                    </div><br>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex m-b-30 no-block">
+                                    <h5 class="card-title m-b-0 align-self-center">Customer List</h5>
+                                </div>
+
+                                    <div class="row">
+                                        {% for customer in customer_list %}
+                                        <div class="col-sm-3 no no-wrap">
+                                            <h4 class="card-title"><a href="{% url 'customer_payrec' customer.user.id %}">{{customer.user.username}}</a></h4>
+                                        </div>
+                                        <div class="col-sm-5 no-wrap">
+                                            <h6>{{ customer.user.email }}</h6>
+                                        </div>
+                                        <div class="col-sm-4 no-wrap">
+                                            <h6>Join : {{ customer.sign_date | date:"M d, Y" }}</h6>
+                                        </div>
+                                        {% endfor%}
+                                    </div>                   
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Balance Chart -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Transcation -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <h5 class="card-title">Transaction</h5>
+                                    </div>
+                                </div>
+                                <div class="table-responsive m-t-20 no-wrap">
+                                    <table class="table vm no-th-brd pro-of-month">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if receive_trans.count > 0 %}
+                                            {%  for receive in receive_trans %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{receive.debit_wallet.user.username}}</h6>
+                                                    {% if receive.description != "" %}
+                                                    <small class="text-muted">Ref: {{receive.description}}</small><br>
+                                                    {% endif %}
+                                                    <small class="text-muted">trx id : {{receive.trx_id}}</small></td>
+                                                <td>${{receive.amount}}</td>
+                                                <td>{{receive.trx_date | date:"M d, Y"}}</td>
+                                            </tr>
+                                            {%  endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Transaction -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- End Page Content -->
+                <!-- ============================================================== -->
+{% endblock %}

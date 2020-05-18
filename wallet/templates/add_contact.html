@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block container %}
+    <br><br>
+    <div class="col-lg-6 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Tab panes -->
+            <div class="card-body">
+                <h5>Your Contact list: </h5>
+                {% if contactlist.count > 0 %}
+                <div class="form-group">
+                    {% for contact in contactlist%}
+                    <h5 class="text-purple">{{ contact.person.username }}</h5>
+                    {% endfor%}
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <h5 class="text-info">No contact in your wallet. Add one.</h5>
+                </div>
+                {% endif %}
+                <form class="form-horizontal form-material" action="{% url 'add_contact' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h5 class="card-title m-b-0">Add Contact</h5>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Country Code</label>
+                        <div class="col-md-12">
+                            <input type="text" name="country_code" maxlength="10" required="" id="id_country_code" placeholder="country code" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Phone Number</label>
+                        <div class="col-md-12">
+                            <input type="text" name="phone_number" maxlength="10" required="" id="id_phone_number" placeholder="Phone number" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Add</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="error-msg-red">
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

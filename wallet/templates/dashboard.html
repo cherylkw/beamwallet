@@ -1,0 +1,216 @@
+{% extends "layout.html" %}
+{% block container %}
+{% load humanize %}
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">{{request.user.username}} Dashboard</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Show Balance block and Balance Chart -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div>
+                                        <h5 class="card-title m-b-0">Total Balance</h5>
+                                    </div>
+                                </div><br>
+                                <div align="center">
+                                    <h2 class="display-6 m-t-30 font-medium">${{totalbalance|intcomma}}</h2>
+                                </div>
+                                <br><hr><br>
+                                <div class="p-t-40">
+                                    <div class="row text-center">
+                                        <div class="col-sm-4"><a href="{% url 'top_up' %}">
+                                            <h5 class="card-title"><span class="round round-danger"><i class="fa fa-money"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Top Up</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'payment_main' %}">
+                                            <h5 class="card-title"><span class="round round-info"><i class="fa fa-telegram"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Send</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'pay_merchant_main' %}">
+                                            <h5 class="card-title"><span class="round round-success"><i class="fa fa-credit-card"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Pay</h6></a>
+                                        </div>
+                                    </div><br>
+                                    <div class="row text-center">
+                                        <div class="col-sm-4"><a href="{% url 'add_bank' %}">
+                                            <h5 class="card-title"><span class="round round-primary"><i class="fa fa-bank"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Add Bank</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'add_contact' %}">
+                                            <h5 class="card-title"><span class="round round-warning"><i class="fa fa-user-circle-o"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Add Contact</h6></a>
+                                        </div>
+                                        <div class="col-sm-4"><a href="{% url 'add_merchant' %}">
+                                            <h5 class="card-title"><span class="round round-danger"><i class="fa fa-coffee"></i></span></h5>
+                                            <h6 class="font-12 font-bold">Add Merchant</h6></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex m-b-30 no-block">
+                                    <h5 class="card-title m-b-0 align-self-center">Balance Chart</h5>
+                                </div>
+                                <div id="visitor" style="height:260px; width:100%;"></div>
+                                <ul class="list-inline m-t-30 text-center font-12">
+                                    <li><i class="fa fa-circle text-muted"></i> Paid</li>
+                                    <li><i class="fa fa-circle text-purple"></i> Sent</li>
+                                    <li><i class="fa fa-circle text-success"></i> Received</li>
+                                    <li><i class="fa fa-circle text-info"></i> Top up</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Balance Chart -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- Spending breakdown info -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="card card-body mailbox">
+                            <h5 class="card-title">Top up</h5>
+                            <div class="mail-contnet"><h5>${{top_up_total}}</h5></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card card-body mailbox">
+                            <h5 class="card-title">Sent</h5>
+                            <div class="mail-contnet"><h5>${{sent_total}}</h5></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card card-body mailbox">
+                            <h5 class="card-title">Received</h5>
+                            <div class="mail-contnet"><h5>${{receive_total}}</h5></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card card-body mailbox">
+                            <h5 class="card-title">Paid</h5>
+                            <div class="mail-contnet"><h5>${{paid_total}}</h5></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Spending breakdown info -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Transcation -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <h5 class="card-title">Transaction</h5>
+                                    </div>
+                                    
+                                </div>
+                                <div class="table-responsive m-t-20 no-wrap">
+                                    <table class="table vm no-th-brd pro-of-month">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if topup_list.count > 0 %}
+                                            {%  for topup in topup_list %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{topup.bank.name}}</h6>
+                                                    {% if topup.description != "" %}
+                                                    <small class="text-muted">Ref: {{topup.description}}</small><br>
+                                                    {% endif %}
+                                                    <small class="text-muted">trx id : {{topup.trx_id}}</small></td>
+                                                <td>${{topup.amount}}</td>
+                                                    <td>{{topup.trx_date | date:"M d, Y"}}</td>
+                                                <td>Top Up</td>
+                                            </tr>
+                                            {%  endfor %}
+                                            {% endif %}
+                                            {% if receive_list.count > 0 %}
+                                            {%  for receive in receive_list %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{receive.debit_wallet.user.username}}</h6>
+                                                    {% if receive.description != "" %}
+                                                    <small class="text-muted">Ref: {{receive.description}}</small><br>
+                                                    {% endif %}
+                                                    <small class="text-muted">trx id : {{receive.trx_id}}</small></td>
+                                                <td>${{receive.amount}}</td>
+                                                    <td>{{receive.trx_date | date:"M d, Y"}}</td>
+                                                <td>Received</td>
+                                            </tr>
+                                            {%  endfor %}
+                                            {% endif %}
+                                            {% if sent_list.count > 0 %}
+                                            {%  for sent in sent_list %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{sent.credit_wallet.user.username}}</h6>
+                                                    {% if sent.description != "" %}
+                                                    <small class="text-muted">Ref: {{sent.description}}</small><br>
+                                                    {% endif %}
+                                                    <small class="text-muted">trx id : {{sent.trx_id}}</small></td>
+                                                <td>${{sent.amount}}</td>
+                                                    <td>{{sent.trx_date | date:"M d, Y"}}</td>
+                                                <td>Sent</td>
+                                            </tr>
+                                            {%  endfor %}
+                                            {% endif %}
+                                            {% if paid_list.count > 0 %}
+                                            {%  for paid in paid_list %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{paid.credit_wallet.user.username}}</h6>
+                                                    {% if paid.description != "" %}
+                                                    <small class="text-muted">Ref: {{paid.description}}</small><br>
+                                                    {% endif %}
+                                                    <small class="text-muted">trx id : {{paid.trx_id}}</small></td>
+                                                <td>${{paid.amount}}</td>
+                                                    <td>{{paid.trx_date | date:"M d, Y"}}</td>
+                                                <td>Paid</td>
+                                            </tr>
+                                            {%  endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Transaction -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- End Page Content -->
+                <!-- ============================================================== -->
+{% endblock %}

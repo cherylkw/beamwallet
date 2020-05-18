@@ -1,0 +1,31 @@
+{% extends "2fa_base.html" %}
+{% block container %}
+  <br><br>
+  <div id="wrapper">
+      <div id="dialog">
+        <h5>Please enter the 7-digit verification code we sent via SMS:</h5>
+
+        <form action="{% url '2fa' %}" method="POST" role="form">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          {{ form.token.errors }}
+
+
+          <div id="form">
+            {{ form.token1 }}
+            {{ form.token2 }}
+            {{ form.token3 }}
+            {{ form.token4 }}
+            {{ form.token5 }}
+            {{ form.token6 }}
+            {{ form.token7 }}
+            <button class="btn btn-primary btn-embossed">Verify</button>
+          </div>
+        </form>
+        <div>
+          <h6>Didn't receive the code?</h6>
+          <div id="small-link"><a href="{%url 'token-sms' %}" class="nav-link" >Send code again</a></div>
+        </div>
+      </div>
+  </div>
+{% endblock %}

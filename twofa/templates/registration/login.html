@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block container %}
+{% load static %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+
+    <div class="container">
+      <div class="row d-flex align-items-center">
+      <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+        <h1>Easy, Fast, And Secure</h1>
+        <h2>Payment Made Easy</h2>
+        <form method="post" role="form" class="php-email-form">
+          {% csrf_token %}
+
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="username" maxlength="254" required="" id="id_username" class="form-control" placeholder="User Name">
+            </div>
+            <div class="col-md-6 form-group">
+              <input type="password" name="password" required="" id="id_password" class="form-control" placeholder="Your password">
+            </div>
+          </div>
+          <div class="mb-3">
+            <div id="error-msg-yellow">
+              {{ form.non_field_errors }}
+              {{ form.username.errors }}
+              {{ form.password.errors }}
+              {% if messages %}
+              {% for message in messages %}
+                <div class="{{ message.tags }}">{{ message }}</div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="text-center"><button class="btn btn-info btn-block my-4" type="submit">Sign in</button></div>
+        </form>
+        <h5>Not a member?
+          <a href="{% url 'register' %}">Sign Up</a>
+        </h5>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+        <img src="{% static 'img/hero-img.png' %}" class="img-fluid" alt="">
+      </div>
+    </div>
+    </div>
+
+  </section><!-- End Hero -->
+  {% endblock %}
