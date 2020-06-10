@@ -16,7 +16,7 @@ SECRET_KEY = '!@v)i0w+*@ld2tsr#l-e6-zp$a(k*%qt68+ago0i(yn6z9g35_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.135.190.80']
 
 # Using Gmail smtp host server for email authenitication 
 EMAIL_USE_TLS = True
