@@ -18,7 +18,7 @@ cryptography==2.1.4
 defusedxml==0.6.0
 distro-info===0.18ubuntu0.18.04.1
 dj-database-url==0.4.1
-Django==2.2.10
+Django==2.2.13
 django-allauth==0.39.1
 django-audit-log==0.7.0
 django-auditlog==0.4.7
